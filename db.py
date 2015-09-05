@@ -1,28 +1,40 @@
 # -*- coding: utf-8 -*-
 
-from gaigo.settings import DATABASE
-from gaigo.backend.sqlmanager import select
+from sqlmanager import select
 
 import MySQLdb as mydb
 
 
 class Connection():
-    def __init__(self):
+    def __init__(self, host, user, passwd, db):
         self.db = mydb.connect(
-            host=DATABASE['host'],
-            user=DATABASE['user'],
-            passwd=DATABASE['passwd'],
-            db=DATABASE['db'],
+            host=host,
+            user=user,
+            passwd=passwd,
+            db=db,
         )
         self.cursor = self.db.cursor()
 
-    def select(self, query, table, fetch=['*'], response=True, in_list=False):
+    def select(self, query, table, fetch=['*'], in_list=False):
         Query = select.Select(query, table, fetch)
         sql = Query.sql_gen()
-        self.sql_action(sql, response, in_list)
+        self.sql_action(sql, need_response=True, in_list=in_list)
 
-    def sql_action(self, sql, response=True, in_list=False):
-        pass
+    def sql_action(self, sql, need_response=False, in_list=False):
+        cursor = self.cursor
+        cursor.execute(sql)
+        response = ''
+        if need_response:
+            response = cursor.fetchall()
+        if in_list:
+            response = self._tupletolist(response)
+        return response
+
+    def _tupletolist(self, input_tuple):
+        input_tuple = list(input_tuple)
+        for i in range(len(input_tuple)):
+            input_tuple[i] = list(input_tuple[i])
+        return input_tuple
 
     def __del__(self):
         self.cursor.close()

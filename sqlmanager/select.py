@@ -46,7 +46,7 @@ class Select():
                 fetch += ',{}'.format(self._fetch[i])
         return fetch
 
-    def query_gen():
+    def query_gen(self):
         operators = {
             'equal': '{}={}',
             'notequal': '{}!={}',
@@ -61,12 +61,12 @@ class Select():
             for a, b in v:
                 if query == '':
                     try:
-                        query += operators[k].format(a,b)
+                        query += operators[k].format(a, b)
                     except:
                         raise KeyError("'{}' is not a valid operator".format(k))
                 else:
                     try:
-                        query += ' AND ' + operators[k].format(a,b)
+                        query += ' AND ' + operators[k].format(a, b)
                     except:
                         raise KeyError("'{}' is not a valid operator".format(k))
         return query
