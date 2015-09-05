@@ -18,17 +18,7 @@ class Select():
             for k, v in query:
                 if type(v).__name__ == 'dict':
                     for a, b in v:
-                        if type(b).__name__ == 'list' and k == 'between':
-                            count = 0
-                            for i in b:
-                                count += 1
-                                if type(i).__name__ != 'int' or type(i).__name__ != 'float':
-                                    raise TypeError(
-                                        'You can only use a between query with a int or float'
-                                    )
-                            if count != 2:
-                                raise TypeError('You can only search between 2 numbers')
-                        elif type(b).__name__ != 'str':
+                        if type(b).__name__ != 'str':
                             raise TypeError('You have entered your query in an incorrect format')
                 else:
                     raise TypeError('You have entered your query in an incorrect format')
@@ -42,7 +32,10 @@ class Select():
         self._sql = self.sql_gen()
 
     def sql_gen(self):
-        return None
+        sql = 'SELECT ' + self.fetch_gen()
+        sql += ' FROM {}'.format(self._table)
+        sql += ' WHERE ' + self.query_gen()
+        return sql
 
     def fetch_gen(self):
         fetch = ''
@@ -54,4 +47,26 @@ class Select():
         return fetch
 
     def query_gen():
-        pass
+        operators = {
+            'equal': '{}={}',
+            'notequal': '{}!={}',
+            'greater': '{}>{}',
+            'greaterequal': '{}>={}',
+            'less': '{}<{}',
+            'lessequal': '{}<{}',
+            'like': '{} LIKE {}',
+        }
+        query = ''
+        for k, v in self._query:
+            for a, b in v:
+                if query == '':
+                    try:
+                        query += operators[k].format(a,b)
+                    except:
+                        raise KeyError("'{}' is not a valid operator".format(k))
+                else:
+                    try:
+                        query += ' AND ' + operators[k].format(a,b)
+                    except:
+                        raise KeyError("'{}' is not a valid operator".format(k))
+        return query
