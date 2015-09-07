@@ -3,12 +3,11 @@
 from .verify import Verify
 
 class Update():
-    def __init__(self, table, query, fetch=['*'], values):
-        verify = Verify(table, query, fetch, values)
+    def __init__(self, table, query,  values):
+        verify = Verify(table, query, values)
         if verify.valid():
             self._table = table
             self._query = query
-            self._fetch = fetch
             self._values = values
         self.sql = self.sql_gen()
     
