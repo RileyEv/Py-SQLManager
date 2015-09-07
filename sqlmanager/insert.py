@@ -2,7 +2,7 @@
 
 from .verify import Verify
 
-class Select():
+class Insert():
     def __init__(self, table, values):
         verify = Verify(table, values)
         if verify.valid():
