@@ -2,7 +2,7 @@
 
 from .verify import Verify
 
-class Select():
+class Update():
     def __init__(self, table, query, fetch=['*'], values):
         verify = Verify(table, query, fetch, values)
         if verify.valid():
