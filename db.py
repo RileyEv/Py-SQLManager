@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sqlmanager import select
+from sqlmanager import select, insert, update
 
 import MySQLdb as mydb
 
@@ -17,6 +17,14 @@ class Connection():
 
     def select(self, query, table, fetch=['*'], in_list=False):
         Query = select.Select(query, table, fetch)
+        self.sql_action(Query.sql, need_response=True, in_list=in_list)
+    
+    def insert(self, table, values, in_list=False):
+        Query = insert.Insert(table, values)
+        self.sql_action(Query.sql, need_response=True, in_list=in_list)
+        
+    def update(self, table, query, values, in_list=False):
+        Query = update.Update(table, query, values)
         self.sql_action(Query.sql, need_response=True, in_list=in_list)
 
     def sql_action(self, sql, need_response=False, in_list=False):
