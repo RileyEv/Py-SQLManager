@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from .verify import Verify
 
 class Select():
     def __init__(self, table, query, fetch=['*']):
