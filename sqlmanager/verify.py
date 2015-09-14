@@ -40,7 +40,7 @@ class Verify():
     
     def verify_fetch(self):
         if type(self._fetch).__name__ == 'list':
-            for i in fetch:
+            for i in self._fetch:
                 if type(i).__name__ != 'str':
                     raise TypeError(
                         "Only strings allowed in the fetch list. This isnt a string '{0}'".format(
