@@ -11,10 +11,10 @@ class Verify():
         self._query_valid = False
         self._table_valid = False
         self._values_valid = False
-        verify_table()
-        self._query_valid = verify_query(self._query)
-        self._values_valid = verify_query(self._values)
-        verify_fetch()
+        self.verify_table()
+        self._query_valid = self.verify_query(self._query)
+        self._values_valid = self.verify_query(self._values)
+        self.verify_fetch()
     
     def verify_table(self):
         if type(self._table).__name__ == 'str':
