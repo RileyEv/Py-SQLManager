@@ -24,9 +24,9 @@ class Verify():
     
     def verify_query(self, query):
         if type(query).__name__ == 'dict':
-            for k, v in query:
+            for k, v in query.iteritems():
                 if type(v).__name__ == 'dict':
-                    for a, b in v:
+                    for a, b in v.iteritems():
                         if type(b).__name__ != 'str':
                             raise TypeError('You have entered your query in an incorrect format')
                             return False
