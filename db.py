@@ -16,7 +16,7 @@ class Connection():
         self.cursor = self.db.cursor()
 
     def select(self, query, table, fetch=['*'], in_list=False):
-        Query = select.Select(query, table, fetch)
+        Query = select.Select(table, query, fetch)
         self.sql_action(Query.sql, need_response=True, in_list=in_list)
     
     def insert(self, table, values, in_list=False):
