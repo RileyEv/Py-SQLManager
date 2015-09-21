@@ -17,7 +17,7 @@ class Verify():
         self.verify_fetch()
     
     def verify_table(self):
-        if isinstance(s, basestring):
+        if isinstance(self._table, basestring):
             self._table_valid = True
         else:
             raise TypeError('The table needs to be a string')
