@@ -3,7 +3,7 @@
 
 class Verify():
     def __init__(self, table, query, fetch=['*'], values={}):
-        self._table = str(table)
+        self._table = table
         self._query = dict(query)
         self._fetch = list(fetch)
         self._values = dict(values)
@@ -12,31 +12,55 @@ class Verify():
         self._table_valid = False
         self._values_valid = False
         self.verify_table()
-        self._query_valid = self.verify_query(self._query)
-        self._values_valid = self.verify_query(self._values)
+        self.verify_query()
+        self.verify_values()
         self.verify_fetch()
     
     def verify_table(self):
-        if type(self._table).__name__ == 'str':
+        try:
+            self._table = str(self._table)
+        except TypeError:
+            raise TypeError('The table need to be a string')
+        else:
             self._table_valid = True
-        else:
-            raise TypeError('The table needs to be a string')
     
-    def verify_query(self, query):
-        if type(query).__name__ == 'dict':
-            for k, v in query.iteritems():
-                if type(v).__name__ == 'dict':
-                    for a, b in v.iteritems():
-                        if type(b).__name__ != 'str':
-                            raise TypeError('You have entered your query in an incorrect format')
-                            return False
-                else:
-                    raise TypeError('You have entered your query in an incorrect format')
-                    return False
-            return True
-        else:
+    def verify_query(self):
+        try:
+            query = dict(self.query)
+        except TypeError:
             raise TypeError('The query needs to be a dict')
-            return False
+        else:
+            for k, v in query.iteritems():
+                try:
+                    v = dict(v)
+                except TypeError:
+                    raise TypeError('You have entered your query in an incorrect format')
+                else:
+                    for a, b in v.iteritems():
+                        try:
+                            b = str(b)
+                        except TypeError:
+                            raise TypeError('You have entered your query in an incorrect format')
+            self._query_valid = True
+            
+    def verify_values(self):
+        try:
+            values = list(self._values)
+        except TypeError:
+            raise TypeError('The values needs to be a list')
+        else:
+            for i in values:
+                try:
+                    i = list(i)
+                except TypeError:
+                    raise TypeError('You have entered your values in an incorrect format')
+                else:
+                    for a in i:
+                        try:
+                            a = str(a)
+                        except TypeError:
+                            raise TypeError('You have entered your values in an incorrect format')
+            self._values_valid = True
     
     def verify_fetch(self):
         if type(self._fetch).__name__ == 'list':
