@@ -28,7 +28,7 @@ class Verify():
         if not isinstance(self._query, dict):
             raise TypeError('The query needs to be a dict')
         else:
-            for k, v in query.iteritems():
+            for k, v in self._query.iteritems():
                 if not isinstance(v, dict):
                     raise TypeError('You have entered your query in an incorrect format')
                 else:
@@ -45,7 +45,7 @@ class Verify():
         except TypeError:
             raise TypeError('The values needs to be a list')
         else:
-            for i in values:
+            for i in self._values:
                 try:
                     i = list(i)
                 except TypeError:
