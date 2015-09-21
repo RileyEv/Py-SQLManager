@@ -4,9 +4,9 @@
 class Verify():
     def __init__(self, table, query, fetch=['*'], values={}):
         self._table = table
-        self._query = dict(query)
-        self._fetch = list(fetch)
-        self._values = dict(values)
+        self._query = query
+        self._fetch = fetch
+        self._values = values
         self._table_valid = False
         self._query_valid = False
         self._table_valid = False
