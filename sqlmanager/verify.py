@@ -25,15 +25,11 @@ class Verify():
             self._table_valid = True
     
     def verify_query(self):
-        try:
-            query = dict(self.query)
-        except TypeError:
+        if !isinstance(self._query, dict):
             raise TypeError('The query needs to be a dict')
         else:
             for k, v in query.iteritems():
-                try:
-                    v = dict(v)
-                except TypeError:
+                if !isinstance(v, dict):
                     raise TypeError('You have entered your query in an incorrect format')
                 else:
                     for a, b in v.iteritems():
