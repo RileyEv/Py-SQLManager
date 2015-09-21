@@ -4,9 +4,9 @@
 class Verify():
     def __init__(self, table, query, fetch=['*'], values={}):
         self._table = str(table)
-        self._query = query
-        self._fetch = fetch
-        self._values = values
+        self._query = dict(query)
+        self._fetch = list(fetch)
+        self._values = dict(values)
         self._table_valid = False
         self._query_valid = False
         self._table_valid = False
@@ -17,7 +17,7 @@ class Verify():
         self.verify_fetch()
     
     def verify_table(self):
-        if isinstance(self._table, basestring):
+        if type(self._table).__name__ == 'str':
             self._table_valid = True
         else:
             raise TypeError('The table needs to be a string')
