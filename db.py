@@ -28,14 +28,16 @@ class Connection():
         self.sql_action(Query._sql, need_response=True, in_list=in_list)
 
     def sql_action(self, sql, need_response=False, in_list=False):
-        cursor = self.cursor
-        cursor.execute(sql)
+        self.cursor.execute(sql)
+        #cursor = self.cursor
+        #cursor.execute(sql)
         response = ''
         if need_response:
-            response = cursor.fetchall()
+            self._response = self.cursor.fetchall()
+            #response = cursor.fetchall()
         if in_list:
-            response = self._tupletolist(response)
-        return response
+            self._response = self._tupletolist(self._response)
+        return self._response
 
     def _tupletolist(self, input_tuple):
         input_tuple = list(input_tuple)
