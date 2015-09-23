@@ -17,15 +17,15 @@ class Connection():
 
     def select(self, query, table, fetch=['*'], in_list=False):
         Query = select.Select(table, query, fetch)
-        self.sql_action(Query.sql, need_response=True, in_list=in_list)
+        self.sql_action(Query._sql, need_response=True, in_list=in_list)
     
     def insert(self, table, values, in_list=False):
         Query = insert.Insert(table, values)
-        self.sql_action(Query.sql, need_response=True, in_list=in_list)
+        self.sql_action(Query._sql, need_response=True, in_list=in_list)
         
     def update(self, table, query, values, in_list=False):
         Query = update.Update(table, query, values)
-        self.sql_action(Query.sql, need_response=True, in_list=in_list)
+        self.sql_action(Query._sql, need_response=True, in_list=in_list)
 
     def sql_action(self, sql, need_response=False, in_list=False):
         cursor = self.cursor
