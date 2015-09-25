@@ -18,7 +18,7 @@ class Connection():
     def select(self, query, table, fetch=['*'], in_list=False):
         Query = select.Select(table, query, fetch)
         print(Query._sql)
-        self.sql_action(Query._sql, need_response=True, in_list=in_list)
+        return self.sql_action(Query._sql, need_response=True, in_list=in_list)
     
     def insert(self, table, values, in_list=False):
         Query = insert.Insert(table, values)
