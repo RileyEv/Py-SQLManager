@@ -4,17 +4,12 @@ from .verify import Verify
 
 class Insert():
     def __init__(self, table, values):
-        verify = Verify(table, values)
+        verify = Verify(table=table, values=values)
         if verify.valid():
             self._table = table
             self._values = values
         self.sql = self.sql_gen()
     
-    def _dict_to_list(self):
-        new_list = []
-        for k,v in self._values:
-            new_list.append([k,v])
-        self._query = new_list
         
     def sql_gen(self):
         sql = 'INSERT INTO ' + self._table
