@@ -2,7 +2,7 @@
 
 
 class Verify():
-    def __init__(self, table, query, fetch=['*'], values={}):
+    def __init__(self, table, query, fetch=['*'], values=[]):
         self._table = table
         self._query = query
         self._fetch = fetch
