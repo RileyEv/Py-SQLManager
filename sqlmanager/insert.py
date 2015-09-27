@@ -17,7 +17,7 @@ class Insert():
         return sql
 
     def values_gen(self):
-        query = ''
+        query = ' '
         count = 0
         query += '('
         for i in self._values:
