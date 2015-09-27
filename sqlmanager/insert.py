@@ -22,17 +22,17 @@ class Insert():
         query += '('
         for i in self._values:
             if count == 0:
-                query += i[0]
+                query += str(i[0])
             else:
-                query += ',' + i[0]
+                query += ',' + str(i[0])
             count += 1
         query += ') VALUES ('
         count = 0
         for i in self._values:
             if count == 0:
-                query += i[1]
+                query += str(i[1])
             else:
-                query += ',' + i[1]
+                query += ',' + str(i[1])
             count += 1
         query += ')'
         return query
