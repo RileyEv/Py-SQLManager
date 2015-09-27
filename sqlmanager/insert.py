@@ -29,7 +29,7 @@ class Insert():
         count = 0
         for i in self._values:
             if count == 0:
-                query += i[1]
+                query += str(i[1])
             else:
-                query += ',' + i[1]
+                query += ',' + str(i[1])
         return query
