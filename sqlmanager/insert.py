@@ -34,5 +34,5 @@ class Insert():
             else:
                 query += ',' + i[1]
             count += 1
-		query += ')'
-		return query
+        query += ')'
+        return query
