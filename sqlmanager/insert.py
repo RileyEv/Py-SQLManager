@@ -8,7 +8,7 @@ class Insert():
         if verify.valid():
             self._table = table
             self._values = values
-        self.sql = self.sql_gen()
+        self._sql = self.sql_gen()
     
         
     def sql_gen(self):
