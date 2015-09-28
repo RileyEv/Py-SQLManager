@@ -29,16 +29,10 @@ class Insert():
         query += ') VALUES ('
         count = 0
         for i in self._values:
-            if type(i[1]).__name__ == 'str':
-                if count == 0:
-                    query += "'{}'".format(str(i[1]))
-                else:
-                    query += ', "{}"'.format(str(i[1]))
+            if count == 0:
+                query += "'{}'".format(str(i[1]))
             else:
-                if count == 0:
-                    query += str(i[1])
-                else:
-                    query += ',' + str(i[1])
+                query += ', "{}"'.format(str(i[1]))
             count += 1
         query += ')'
         return query
