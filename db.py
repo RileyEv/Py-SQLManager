@@ -15,7 +15,7 @@ class Connection():
         )
         self.cursor = self.db.cursor()
 
-    def select(self, query, table, fetch=['*'], in_list=False):
+    def select(self, table, query, fetch=['*'], in_list=False):
         Query = select.Select(table, query, fetch)
         return self.sql_action(Query._sql, need_response=True, in_list=in_list)
     
