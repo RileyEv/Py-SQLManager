@@ -9,7 +9,7 @@ class Update():
             self._table = table
             self._query = query
             self._values = values
-        self.sql = self.sql_gen()
+        self._sql = self.sql_gen()
     
     def _dict_to_list(self):
         new_list = []
