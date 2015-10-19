@@ -43,8 +43,8 @@ class Update():
             'like': '{} LIKE {}',
         }
         query = ''
-        for k, v in self._query:
-            for a, b in v:
+        for k, v in self._query.iteritems():
+            for a, b in v.iteritems():
                 if query == '':
                     try:
                         query += operators[k].format(a, b)
