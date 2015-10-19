@@ -4,7 +4,7 @@ from .verify import Verify
 
 class Update():
     def __init__(self, table, query,  values):
-        verify = Verify(table, query, values)
+        verify = Verify(table=table, query=query, values=values)
         if verify.valid():
             self._table = table
             self._query = query
