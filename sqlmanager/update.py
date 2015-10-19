@@ -34,8 +34,8 @@ class Update():
         
     def query_gen(self):
         operators = {
-            'equal': '{}={}',
-            'notequal': '{}!={}',
+            'equal': "{}='{}'",
+            'notequal': "{}!='{}'",
             'greater': '{}>{}',
             'greaterequal': '{}>={}',
             'less': '{}<{}',
