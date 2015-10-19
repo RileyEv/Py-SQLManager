@@ -29,6 +29,7 @@ class Connection():
 
     def sql_action(self, sql, need_response=False, in_list=False):
         self.cursor.execute(sql)
+        self.db.commit()
         self._response = ''
         if need_response:
             self._response = self.cursor.fetchall()
