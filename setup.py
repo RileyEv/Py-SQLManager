@@ -6,5 +6,5 @@ setup(name='PySQLManager',
     author='RilCraft',
     author_email='riley@gaigo.org',
     url='https://github.com/RileyEv/Py-SQLManager/',
-    packages=['distutils', 'distutils.command'],
+    packages=['pysqlmanager', 'pysqlmanager.sqlmanager'],
 )
