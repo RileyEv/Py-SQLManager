@@ -3,6 +3,9 @@
 from sqlmanager import select, insert, update
 
 import MySQLdb as mydb
+import cgitb
+
+cgitb.enable(True)
 
 
 class Connection():
