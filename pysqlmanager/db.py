@@ -31,8 +31,8 @@ class Connection():
 
     def insert(self, table, values, in_list=False):
         Query = insert.Insert(table, values)
-        return self.sql_action(Query._sql, need_response=False, in_list=in_list) +
-    self._get_primary_column(table)
+        return [self.sql_action(Query._sql, need_response=False, in_list=in_list),
+    self._get_primary_column(table)]
 
     def update(self, table, query, values, in_list=False):
         Query = update.Update(table, query, values)
