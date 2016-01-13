@@ -2,6 +2,7 @@
 
 from .verify import Verify
 
+
 class Insert():
     def __init__(self, table, values):
         verify = Verify(table=table, values=values)
@@ -9,8 +10,7 @@ class Insert():
             self._table = table
             self._values = values
         self._sql = self.sql_gen()
-    
-        
+
     def sql_gen(self):
         sql = 'INSERT INTO ' + self._table
         sql += self.values_gen()

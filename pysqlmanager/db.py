@@ -18,14 +18,22 @@ class Connection():
         )
         self.cursor = self.db.cursor()
 
+    def _get_primary_column(self, table=None):
+        if table is not None:
+            self.cursor.execute("SHOW KEYS FROM {0} WHERE Key_name='PRIMARY'".format(table))
+            return cursor.fetchone()
+        else:
+            return None
+
     def select(self, table, query, fetch=['*'], in_list=False):
         Query = select.Select(table, query, fetch)
         return self.sql_action(Query._sql, need_response=True, in_list=in_list)
-    
+
     def insert(self, table, values, in_list=False):
         Query = insert.Insert(table, values)
-        return self.sql_action(Query._sql, need_response=False, in_list=in_list)
-        
+        return self.sql_action(Query._sql, need_response=False, in_list=in_list) +
+    self._get_primary_column(table)
+
     def update(self, table, query, values, in_list=False):
         Query = update.Update(table, query, values)
         return self.sql_action(Query._sql, need_response=False, in_list=in_list)
