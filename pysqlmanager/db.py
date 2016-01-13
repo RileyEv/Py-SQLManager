@@ -21,7 +21,7 @@ class Connection():
     def _get_primary_column(self, table=None):
         if table is not None:
             self.cursor.execute("SHOW KEYS FROM {0} WHERE Key_name='PRIMARY'".format(table))
-            return self.cursor.fetchone()
+            return self.cursor.fetchone()[4]
         else:
             return None
 
