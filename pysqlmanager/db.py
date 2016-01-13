@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from sqlmanager import select, insert, update
+from sqlmanager import select, insert, update, verify
 
 import MySQLdb as mydb
 import cgitb
+import uuid
 
 cgitb.enable(True)
 
@@ -25,14 +26,39 @@ class Connection():
         else:
             return None
 
+    def _check_primary_key(table, pk):
+        self.cursor.execute("select * from {0} where {1}='{2}'".format(table, pk[0], pk[1]))
+        if self.cursor.fetchone() is None:
+            return False
+        else:
+            return True
+
     def select(self, table, query, fetch=['*'], in_list=False):
         Query = select.Select(table, query, fetch)
         return self.sql_action(Query._sql, need_response=True, in_list=in_list)
 
     def insert(self, table, values, in_list=False):
+        pk = self._get_primary_column(table)
+        verify = Verify(values=values)
+        if verify:
+            pkfound = None
+            for i in values:
+                if i[0] == pk:
+                    pkfound = i
+                    break
+        if pkfound is not None:
+            pkexist = _check_primary_key(table, pkfound)
+            if pkexist:
+                raise KeyError('The primary key already exists')
+        else:
+            pkexist = True
+            while pkexist:
+                pkfound = [pk, str(uuid.uuid4())]
+                pkexist = _check_primary_key(table, pkfound)
+            values.append(pkfound)
+
         Query = insert.Insert(table, values)
-        return [self.sql_action(Query._sql, need_response=False, in_list=in_list),
-    self._get_primary_column(table)]
+        return self.sql_action(Query._sql, need_response=False, in_list=in_list)
 
     def update(self, table, query, values, in_list=False):
         Query = update.Update(table, query, values)
