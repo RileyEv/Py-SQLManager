@@ -15,7 +15,7 @@ class Verify():
         self.verify_query()
         self.verify_values()
         self.verify_fetch()
-    
+
     def verify_table(self):
         try:
             self._table = str(self._table)
@@ -23,7 +23,7 @@ class Verify():
             raise TypeError('The table need to be a string')
         else:
             self._table_valid = True
-    
+
     def verify_query(self):
         if not isinstance(self._query, dict):
             raise TypeError('The query needs to be a dict')
@@ -38,7 +38,7 @@ class Verify():
                         except TypeError:
                             raise TypeError('You have entered your query in an incorrect format')
             self._query_valid = True
-            
+
     def verify_values(self):
         try:
             values = list(self._values)
@@ -57,7 +57,7 @@ class Verify():
                         except TypeError:
                             raise TypeError('You have entered your values in an incorrect format')
             self._values_valid = True
-    
+
     def verify_fetch(self):
         if type(self._fetch).__name__ == 'list':
             for i in self._fetch:
@@ -70,7 +70,7 @@ class Verify():
             self._fetch_valid = True
         else:
             raise TypeError('The fetch needs to be a list')
-            
+
     def valid(self):
         if self._table_valid and self._query_valid and self._fetch_valid and self._values_valid:
             return True
