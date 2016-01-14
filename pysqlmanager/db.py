@@ -39,7 +39,7 @@ class Connection():
 
     def insert(self, table, values, in_list=False):
         pk = self._get_primary_column(table)
-        verify = Verify(values=values)
+        verify = verify.Verify(values=values)
         if verify:
             pkfound = None
             for i in values:
