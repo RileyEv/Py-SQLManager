@@ -47,14 +47,14 @@ class Connection():
                     pkfound = i
                     break
         if pkfound is not None:
-            pkexist = _check_primary_key(table, pkfound)
+            pkexist = self._check_primary_key(table, pkfound)
             if pkexist:
                 raise KeyError('The primary key already exists')
         else:
             pkexist = True
             while pkexist:
                 pkfound = [pk, str(uuid.uuid4())]
-                pkexist = _check_primary_key(table, pkfound)
+                pkexist = self._check_primary_key(table, pkfound)
             values.append(pkfound)
 
         Query = insert.Insert(table, values)
