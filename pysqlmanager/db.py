@@ -26,7 +26,7 @@ class Connection():
         else:
             return None
 
-    def _check_primary_key(table, pk):
+    def _check_primary_key(self, table, pk):
         self.cursor.execute("select * from {0} where {1}='{2}'".format(table, pk[0], pk[1]))
         if self.cursor.fetchone() is None:
             return False
