@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 
 class Verify():
@@ -61,7 +62,7 @@ class Verify():
     def verify_fetch(self):
         if type(self._fetch).__name__ == 'list':
             for i in self._fetch:
-                if type(i).__name__ != 'str':
+                if type(i).__name__ != 'unicode':
                     raise TypeError(
                         "Only strings allowed in the fetch list. This isnt a string '{0}'".format(
                             i
