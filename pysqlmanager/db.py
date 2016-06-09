@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 from sqlmanager import select, insert, update, verify
 
@@ -64,7 +65,7 @@ class Connection():
         Query = update.Update(table, query, values)
         return self.sql_action(Query._sql, need_response=False, in_list=in_list)
 
-    def sql_action(self, sql, need_response=False, in_list=False):
+    def sql_action(self, sql, need_response=False, in_list=False, table=None):
         self.cursor.execute(sql)
         self.db.commit()
         self._response = ''
@@ -72,7 +73,19 @@ class Connection():
             self._response = self.cursor.fetchall()
         if in_list:
             self._response = self._tupletolist(self._response)
+        else:
+            self._response = self._tupletodict(self._response, cursor.description)
         return self._response
+
+    def _tupletodict(self, input_tuple, names):
+        response = []
+        for i in input_tuple:
+            if i != None:
+                item = {}
+                for n in range(len(i)):
+                    item[names[n]] = i[n]
+                response.append(item)
+        return response
 
     def _tupletolist(self, input_tuple):
         input_tuple = list(input_tuple)
