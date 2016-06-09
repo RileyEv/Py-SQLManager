@@ -83,7 +83,7 @@ class Connection():
             if i != None:
                 item = {}
                 for n in range(len(i)):
-                    item[names[n]] = i[n]
+                    item[names[n][0]] = i[n]
                 response.append(item)
         return response
 
