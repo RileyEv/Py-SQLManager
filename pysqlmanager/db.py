@@ -74,7 +74,7 @@ class Connection():
         if in_list:
             self._response = self._tupletolist(self._response)
         else:
-            self._response = self._tupletodict(self._response, cursor.description)
+            self._response = self._tupletodict(self._response, self.cursor.description)
         return self._response
 
     def _tupletodict(self, input_tuple, names):
